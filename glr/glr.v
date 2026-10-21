@@ -34,7 +34,10 @@ glr
 #$$$$$$$$$$$$$$$$$$$$$$$$$$$$$  R O U T I N E S  $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 ***** Flora_routines:
 
-glrgen				subroutine
+# Generate equilibrium and initial pertubation?
+glrgen				subroutine 
+# Advance solution in time?
+glrexepy    subroutine
 amat								subroutine
 	# ?
 amax2(a:real,im:integer,jm:integer,amax:real,

@@ -1,0 +1,27 @@
+
+
+
+dependencies:  glr_p.o basgen.o glrpymodule.c Forthon.h Forthon.c  coils.o diagno.o energy.o equil.o initial.o math.o matrix.o rightvec.o setup.o blas.o
+
+
+
+%.o: ../../glr/%.F glr_p.o
+	gfortran -fPIC -ffixed-line-length-132 -DFPSIZE=8 -fdefault-real-8 -fdefault-double-8 -DISZ=8 -fdefault-integer-8 -fimplicit-none -fno-second-underscore -O3 -ftree-vectorize -ftree-vectorizer-verbose=0 -Ofast -DFORTHON -cpp -DNINPUT=1000 -DYES=1 -DOK=0 -DDONE=1 -DSTDOUT=6 -fallow-argument-mismatch -finit-real=zero -finit-integer=0 -fdefault-real-8 -DECHARG=4.8e-10 -DPi=3.141592653 -I/home/ssharpe/minforge_ne/envs/FLORAMOD/lib/python3.11/site-packages/numpy/_core/include  -c $<
+%.o: ../../glr/%.F90 glr_p.o
+	gfortran -fPIC -DFPSIZE=8 -fdefault-real-8 -fdefault-double-8 -DISZ=8 -fdefault-integer-8 -fimplicit-none -fno-second-underscore -O3 -ftree-vectorize -ftree-vectorizer-verbose=0 -Ofast -DFORTHON -cpp -DNINPUT=1000 -DYES=1 -DOK=0 -DDONE=1 -DSTDOUT=6 -fallow-argument-mismatch -finit-real=zero -finit-integer=0 -fdefault-real-8 -DECHARG=4.8e-10 -DPi=3.141592653 -I/home/ssharpe/minforge_ne/envs/FLORAMOD/lib/python3.11/site-packages/numpy/_core/include  -c $<
+
+
+Forthon.h:/home/ssharpe/minforge_ne/envs/FLORAMOD/lib/python3.11/site-packages/Forthon/Forthon.h
+	/home/ssharpe/minforge_ne/envs/FLORAMOD/bin/python3.11 -c "from Forthon.preprocess import main;main()" --f90 -tlinux --pkgbase flora --underscoring --no2underscores -F gfortran /home/ssharpe/minforge_ne/envs/FLORAMOD/lib/python3.11/site-packages/Forthon/Forthon.h Forthon.h
+Forthon.c:/home/ssharpe/minforge_ne/envs/FLORAMOD/lib/python3.11/site-packages/Forthon/Forthon.c
+	/home/ssharpe/minforge_ne/envs/FLORAMOD/bin/python3.11 -c "from Forthon.preprocess import main;main()" --f90 -tlinux --pkgbase flora --underscoring --no2underscores -F gfortran /home/ssharpe/minforge_ne/envs/FLORAMOD/lib/python3.11/site-packages/Forthon/Forthon.c Forthon.c
+
+glr_p.o:glr_p.F90 
+	gfortran -fPIC -DFPSIZE=8 -fdefault-real-8 -fdefault-double-8 -DISZ=8 -fdefault-integer-8 -fimplicit-none -fno-second-underscore  -Ofast -DFORTHON -cpp -DNINPUT=1000 -DYES=1 -DOK=0 -DDONE=1 -DSTDOUT=6 -fallow-argument-mismatch -finit-real=zero -finit-integer=0 -fdefault-real-8 -DECHARG=4.8e-10 -DPi=3.141592653 -I/home/ssharpe/minforge_ne/envs/FLORAMOD/lib/python3.11/site-packages/numpy/_core/include  -c glr_p.F90
+glr_p.F90: glrpymodule.c
+glrpymodule.c::../../glr/glr.v
+	/home/ssharpe/minforge_ne/envs/FLORAMOD/bin/python3.11 -c "from Forthon.wrappergenerator import wrappergenerator_main;wrappergenerator_main()" --realsize 8 --f90 -t linux --pkgbase flora --underscoring --no2underscores -F gfortran -a   glr ../../glr/glr.v
+glrpymodule.c:: ../../glr/basgen.F  ../../glr/coils.F ../../glr/diagno.F ../../glr/energy.F ../../glr/equil.F ../../glr/initial.F ../../glr/math.F ../../glr/matrix.F ../../glr/rightvec.F ../../glr/setup.F ../../glr/blas.F
+	@touch glrpymodule.c
+clean:
+	rm -rf *.o *_p.F90 *.mod *module.c *.scalars *.so Forthon.c Forthon.h forthonf2c.h build

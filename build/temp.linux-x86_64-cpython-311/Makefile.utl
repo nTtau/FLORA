@@ -1,0 +1,27 @@
+
+
+
+dependencies:  utl_p.o utility.o utlpymodule.c Forthon.h Forthon.c 
+
+
+
+%.o: ../../utl/%.F utl_p.o
+	gfortran -fPIC -ffixed-line-length-132 -DFPSIZE=8 -fdefault-real-8 -fdefault-double-8 -DISZ=8 -fdefault-integer-8 -fimplicit-none -fno-second-underscore -O3 -ftree-vectorize -ftree-vectorizer-verbose=0 -Ofast -DFORTHON -cpp -DNINPUT=1000 -DYES=1 -DOK=0 -DDONE=1 -DSTDOUT=6 -fallow-argument-mismatch -finit-real=zero -finit-integer=0 -fdefault-real-8 -DECHARG=4.8e-10 -DPi=3.141592653 -I/home/ssharpe/minforge_ne/envs/FLORAMOD/lib/python3.11/site-packages/numpy/_core/include  -c $<
+%.o: ../../utl/%.F90 utl_p.o
+	gfortran -fPIC -DFPSIZE=8 -fdefault-real-8 -fdefault-double-8 -DISZ=8 -fdefault-integer-8 -fimplicit-none -fno-second-underscore -O3 -ftree-vectorize -ftree-vectorizer-verbose=0 -Ofast -DFORTHON -cpp -DNINPUT=1000 -DYES=1 -DOK=0 -DDONE=1 -DSTDOUT=6 -fallow-argument-mismatch -finit-real=zero -finit-integer=0 -fdefault-real-8 -DECHARG=4.8e-10 -DPi=3.141592653 -I/home/ssharpe/minforge_ne/envs/FLORAMOD/lib/python3.11/site-packages/numpy/_core/include  -c $<
+
+
+Forthon.h:/home/ssharpe/minforge_ne/envs/FLORAMOD/lib/python3.11/site-packages/Forthon/Forthon.h
+	/home/ssharpe/minforge_ne/envs/FLORAMOD/bin/python3.11 -c "from Forthon.preprocess import main;main()" --f90 -tlinux --pkgbase flora --underscoring --no2underscores -F gfortran /home/ssharpe/minforge_ne/envs/FLORAMOD/lib/python3.11/site-packages/Forthon/Forthon.h Forthon.h
+Forthon.c:/home/ssharpe/minforge_ne/envs/FLORAMOD/lib/python3.11/site-packages/Forthon/Forthon.c
+	/home/ssharpe/minforge_ne/envs/FLORAMOD/bin/python3.11 -c "from Forthon.preprocess import main;main()" --f90 -tlinux --pkgbase flora --underscoring --no2underscores -F gfortran /home/ssharpe/minforge_ne/envs/FLORAMOD/lib/python3.11/site-packages/Forthon/Forthon.c Forthon.c
+
+utl_p.o:utl_p.F90 
+	gfortran -fPIC -DFPSIZE=8 -fdefault-real-8 -fdefault-double-8 -DISZ=8 -fdefault-integer-8 -fimplicit-none -fno-second-underscore  -Ofast -DFORTHON -cpp -DNINPUT=1000 -DYES=1 -DOK=0 -DDONE=1 -DSTDOUT=6 -fallow-argument-mismatch -finit-real=zero -finit-integer=0 -fdefault-real-8 -DECHARG=4.8e-10 -DPi=3.141592653 -I/home/ssharpe/minforge_ne/envs/FLORAMOD/lib/python3.11/site-packages/numpy/_core/include  -c utl_p.F90
+utl_p.F90: utlpymodule.c
+utlpymodule.c::../../utl/utl.v
+	/home/ssharpe/minforge_ne/envs/FLORAMOD/bin/python3.11 -c "from Forthon.wrappergenerator import wrappergenerator_main;wrappergenerator_main()" --realsize 8 --f90 -t linux --pkgbase flora --underscoring --no2underscores -F gfortran -a   -d glr.scalars utl ../../utl/utl.v
+utlpymodule.c:: ../../utl/utility.F 
+	@touch utlpymodule.c
+clean:
+	rm -rf *.o *_p.F90 *.mod *module.c *.scalars *.so Forthon.c Forthon.h forthonf2c.h build

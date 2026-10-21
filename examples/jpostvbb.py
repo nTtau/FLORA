@@ -1,5 +1,11 @@
 from flora import *
-# SetPrecision[Table[jperp[bb],{bb,.1,20,.1}],8]
+
+
+#Seems to be precomputed lookup tables for given normalised mag fields 
+# Used to calculate the particle response to different fields 
+# We will assume this does not need modification for now 
+
+#jperpb = perpendicular response at given normalised magnetic field b 
 glr.jperpb[0:200]=[
 0.000019072218, 0.000076557782, 0.00017286659, 0.00030841748, 
 0.00048363847, 0.00069896710, 0.00095485067, 0.0012517466, 0.0015901227, 
@@ -38,6 +44,7 @@ glr.jperpb[0:200]=[
 0.082551820, 0.073835757, 0.065672902, 0.058056451, 0.050978546, 
 0.044430291, 0.038401748, 0.032881947, 0.027858869, 0.023319437]
 
+#jparb = parallel response at given normalised magnetic field b 
 # SetPrecision[Table[jpar[bb],{bb,.1,20,.1}],8]
 glr.jparb[0:200]=[
 0.0055191536, 0.011000096, 0.016442624, 0.021846531, 0.027211610, 
@@ -77,7 +84,7 @@ glr.jparb[0:200]=[
 0.0022656345, 0.0019143328, 0.0016039096, 0.0013313574, 0.0010937425, 
 0.00088820921, 0.00071198390, 0.00056237897, 0.00043679688]
 
-
+#jdfb = first derivative response function
 # SetPrecision[Table[jdf[bb],{bb,.1,20,.1}],8]
 glr.jdfb[0:200]=[
 0.0019105653, 0.0019207034, 0.0019309881, 0.0019414228, 
@@ -125,6 +132,7 @@ glr.jdfb[0:200]=[
 -0.0017465412, -0.0016037390, -0.0014650397, -0.0013306437, 
 -0.0012007503, -0.0010755595]
 
+#jd2fb = 2nd derivative response function
 # SetPrecision[Table[jd2f[bb],{bb,.1,20,.1}],8]
 glr.jd2fb[0:200]=[
 0.00050329821, 0.00025527178, 0.00017265179, 0.00013138472, 
@@ -178,7 +186,7 @@ glr.jd2fb[0:200]=[
 0.000039421443, 0.000038294362, 0.000037124645, 0.000035914377, 
 0.000034665196, 0.000033378260, 0.000032054192, 0.000030693005]
 
-
+#ddparb = deriavtive of parallel response function
 #  SetPrecision[Table[ddbjpar[bb],{bb,.1,20,.1}],8]
 glr.ddbparb[0:200]=[
 0.055000814, 0.054617690, 0.054232523, 0.053845285, 0.053455944, 
@@ -224,7 +232,7 @@ glr.ddbparb[0:200]=[
 -0.0022110497, -0.0019042419, -0.0016247469, -0.0013716809, 
 -0.0011441400]
 
-
+#ddbprpb = deriavtive of perpendicular response function
 # SetPrecision[Table[ddbprp[bb],{bb,.1,20,.1}],8]
 glr.ddbprpb[0:200]=[
 0.00038211305, 0.00076828136, 0.0011585929, 0.0015531382, 
